@@ -1,0 +1,40 @@
+# CMake Version
+cmake_minimum_required(VERSION 3.18.0)
+
+# Project Name
+set(PROJECT_NAME code_repo)
+project(${PROJECT_NAME} LANGUAGES C CXX)
+
+set(EXTLIBS_INCLUDE ${CMAKE_SOURCE_DIR}/extlib/include)
+
+# CUDA PBS Library
+file(GLOB_RECURSE SOURCES "src/*.cu" "src/*.cpp" "src/*.c")
+file(GLOB_RECURSE HEADERS "include/*.cuh" "include/*.hpp" "include/*.h")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ./bin/Release)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ./bin/Debug)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ./lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ./lib/Release)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ./lib/Debug)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ./lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ./lib/Release)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ./lib/Debug)
+
+add_executable(${PROJECT_NAME}
+    ${SOURCES}
+    ${HEADERS}
+)
+
+# fixed c4819 warning
+set_target_properties(
+    ${PROJECT_NAME} PROPERTIES
+    OUTPUT_NAME_DEBUG ${PROJECT_NAME}d
+    OUTPUT_NAME_RELEASE ${PROJECT_NAME}
+    COMPILE_FLAGS ""
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    include
+    ${EXTLIBS_INCLUDE}
+)
+
