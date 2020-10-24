@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-10-23 12:06:51
+ * @LastEditTime: 2020-10-24 12:53:19
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
@@ -30,4 +30,9 @@ void swap_bit(int &a, int &b)
         b ^= a;
         a ^= b;
     }
+}
+
+int sign_reverse_bit(int a)
+{
+    return ~a + 1;
 }

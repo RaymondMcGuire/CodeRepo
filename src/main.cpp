@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-10-23 12:11:10
+ * @LastEditTime: 2020-10-24 12:55:08
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -51,4 +51,11 @@ int main(int argc, char **argv)
     KIRI_LOG_DEBUG("Bit Swap Func, Before Swap: a={0:d}, a1={1:d}", a, a1);
     swap_bit(a, a1);
     KIRI_LOG_DEBUG("Bit Swap Func, After Swap: a={0:d}, a1={1:d}", a, a1);
+
+    KIRI_LOG_INFO("Sign Reverse Func!");
+    a = 12354, a1 = -12345;
+    int b = sign_reverse_bit(a);
+    KIRI_LOG_DEBUG("Sign Reverse Func, Before Reverse: a={0:d}; After Reverse: a={1:d}", a, b);
+    b = sign_reverse_bit(a1);
+    KIRI_LOG_DEBUG("Sign Reverse Func, Before Reverse: a={0:d}; After Reverse: a={1:d}", a1, b);
 }
