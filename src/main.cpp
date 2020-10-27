@@ -1,15 +1,16 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-10-26 13:11:18
+ * @LastEditTime: 2020-10-27 12:48:49
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
  */
-#include <kiri_log.h>
+
 #include <kiri_timer.h>
 
 #include <kiri_func.h>
+#include <kiri_case.h>
 
 int main(int argc, char **argv)
 {
@@ -69,4 +70,12 @@ int main(int argc, char **argv)
     KIRI_LOG_DEBUG("Abs Bit Func, Value ={0}; Abs ={1}", a, b);
     b = abs_bit(a1);
     KIRI_LOG_DEBUG("Abs Bit Func, Value ={0}; Abs ={1}", a1, b);
+
+    int n = 5;
+    int aryA[5] = {1, 3, 5, 7, 9};
+    int aryB[5];
+    KIRI_LOG_INFO("Case1: a[N] known，b[i] = a[0]*...*a[N-1]/a[i], no temp variables");
+    printArray(aryA, 5);
+    case1(aryA, aryB, n);
+    printArray(aryB, 5);
 }

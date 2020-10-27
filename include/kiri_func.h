@@ -1,12 +1,23 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-10-26 13:10:28
+ * @LastEditTime: 2020-10-27 12:53:45
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
  */
 #include <macro.h>
+#include <kiri_log.h>
+
+void printArray(int a[], int n)
+{
+    printf("Array=[");
+    for (size_t i = 0; i < n; i++)
+    {
+        printf(" %d ", a[i]);
+    }
+    printf("]\n");
+}
 
 void swap(int &a, int &b)
 {

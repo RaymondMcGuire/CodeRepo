@@ -1,7 +1,7 @@
 /*** 
  * @Author: Jayden Zhang
  * @Date: 2020-09-27 02:54:00
- * @LastEditTime: 2020-10-19 00:42:00
+ * @LastEditTime: 2020-10-27 12:41:11
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_log.h
@@ -11,7 +11,6 @@
 #define _KIRI_LOG_H_
 
 #include <spdlog/spdlog.h>
-#include <spdlog/fmt/ostr.h>
 
 class KiriLog
 {
