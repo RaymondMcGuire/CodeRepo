@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-10-27 12:53:45
+ * @LastEditTime: 2020-10-30 15:19:06
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
@@ -68,4 +68,47 @@ int abs_bit(int a)
 {
     int b = get_sign_bit(a);
     return ((a ^ b) - b);
+}
+
+/*** 
+ * @description: find prime from 2 to n, not optimize.
+ * @param {*}
+ * @return prime number
+ */
+int find_prime_number(int primes[], bool flags[], int n)
+{
+    int cnt = 0;
+
+    for (size_t i = 2; i < n; i++)
+    {
+        if (!flags[i])
+        {
+            primes[cnt++] = i;
+            for (size_t j = i; j < n; j += i)
+            {
+                flags[j] = true;
+            }
+        }
+    }
+
+    return cnt;
+}
+
+int find_prime_number_bit(int primes[], int flags[], int n)
+{
+    int cnt = 0;
+
+    for (size_t i = 2; i < n; i++)
+    {
+        if (!((flags[i / 32] >> (i % 32)) & 1))
+        {
+            primes[cnt++] = i;
+            for (size_t j = i; j < n; j += i)
+            {
+                flags[j / 32] |= (1 << (j % 32));
+            }
+        }
+    }
+
+    return cnt;
 }

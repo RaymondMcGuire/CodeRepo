@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-10-27 12:48:49
+ * @LastEditTime: 2020-10-30 15:22:54
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -74,8 +74,23 @@ int main(int argc, char **argv)
     int n = 5;
     int aryA[5] = {1, 3, 5, 7, 9};
     int aryB[5];
-    KIRI_LOG_INFO("Case1: a[N] known，b[i] = a[0]*...*a[N-1]/a[i], no temp variables");
+    KIRI_LOG_INFO("Case1: a[N] known, b[i] = a[0]*...*a[N-1]/a[i], no temp variables");
     printArray(aryA, 5);
     case1(aryA, aryB, n);
     printArray(aryB, 5);
+
+    KIRI_LOG_INFO("Find Prime Func!");
+    const int MAX_NUM = 100;
+    int primes[MAX_NUM / 3 + 1];
+    bool flags[MAX_NUM];
+
+    memset(flags, false, sizeof(flags));
+    int prime_num = find_prime_number(primes, flags, MAX_NUM);
+    printArray(primes, prime_num);
+
+    int bit_primes[MAX_NUM / 3 + 1];
+    int bit_flags[MAX_NUM / 32 + 1];
+    memset(bit_flags, 0, sizeof(bit_flags));
+    prime_num = find_prime_number_bit(bit_primes, bit_flags, MAX_NUM);
+    printArray(bit_primes, prime_num);
 }
