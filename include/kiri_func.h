@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-10-30 15:19:06
+ * @LastEditTime: 2020-10-31 18:23:57
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
@@ -9,14 +9,30 @@
 #include <macro.h>
 #include <kiri_log.h>
 
-void printArray(int a[], int n)
+void PrintArray(int a[], int n)
 {
-    printf("Array=[");
+    std::string s = "";
     for (size_t i = 0; i < n; i++)
     {
-        printf(" %d ", a[i]);
+        s += std::to_string(a[i]) + " ";
     }
-    printf("]\n");
+    KIRI_LOG_DEBUG("Array=[ {0}]", s);
+}
+
+template <class T>
+void PrintBinary(T a)
+{
+    std::string s = "";
+    for (int i = sizeof(a) * 8 - 1; i >= 0; --i)
+    {
+        if ((a >> i) & 1)
+            s += "1";
+        else
+            s += "0";
+        if (i == 8)
+            s += " ";
+    }
+    KIRI_LOG_DEBUG("Binary=[ {0}]", s);
 }
 
 void swap(int &a, int &b)

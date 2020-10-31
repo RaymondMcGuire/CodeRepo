@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-10-30 15:22:54
+ * @LastEditTime: 2020-10-31 18:28:33
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -75,9 +75,9 @@ int main(int argc, char **argv)
     int aryA[5] = {1, 3, 5, 7, 9};
     int aryB[5];
     KIRI_LOG_INFO("Case1: a[N] known, b[i] = a[0]*...*a[N-1]/a[i], no temp variables");
-    printArray(aryA, 5);
+    PrintArray(aryA, 5);
     case1(aryA, aryB, n);
-    printArray(aryB, 5);
+    PrintArray(aryB, 5);
 
     KIRI_LOG_INFO("Find Prime Func!");
     const int MAX_NUM = 100;
@@ -86,11 +86,19 @@ int main(int argc, char **argv)
 
     memset(flags, false, sizeof(flags));
     int prime_num = find_prime_number(primes, flags, MAX_NUM);
-    printArray(primes, prime_num);
+    PrintArray(primes, prime_num);
 
     int bit_primes[MAX_NUM / 3 + 1];
     int bit_flags[MAX_NUM / 32 + 1];
     memset(bit_flags, 0, sizeof(bit_flags));
     prime_num = find_prime_number_bit(bit_primes, bit_flags, MAX_NUM);
-    printArray(bit_primes, prime_num);
+    PrintArray(bit_primes, prime_num);
+
+    KIRI_LOG_INFO("Reverse Bits Func!");
+    unsigned short us = 34520;
+    KIRI_LOG_DEBUG("Value={0}", us);
+    PrintBinary(us);
+    KIRI_LOG_DEBUG("After Reverse Bits");
+    us = (us >> 8) | (us << 8);
+    PrintBinary(us);
 }
