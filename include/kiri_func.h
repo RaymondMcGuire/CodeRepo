@@ -1,13 +1,19 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-11-01 12:40:56
+ * @LastEditTime: 2020-11-02 03:02:02
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
  */
+#pragma once
+
 #include <macro.h>
 #include <kiri_log.h>
+
+#include <fstream>
+#include <filesystem>
+namespace fs = std::filesystem;
 
 void PrintArray(int a[], int n)
 {
@@ -138,4 +144,24 @@ T reverse_bit(T val)
     val = ((val & 0xFF00) >> 8) | ((val & 0x00FF) << 8);
 
     return val;
+}
+
+void write_binary_file(uint8_t *buf, int size)
+{
+    KIRI_LOG_DEBUG("Current Path={0}", fs::current_path().string());
+    std::string output_path = fs::current_path().string() + "/data.bin";
+    std::ofstream ofile(output_path, std::ios::binary);
+    ofile.write((char *)buf, size);
+    ofile.close();
+}
+
+std::vector<char> read_binary_file(std::string const &file_name)
+{
+
+    std::string input_path = fs::current_path().string() + "/" + file_name;
+    std::ifstream ifs(input_path, std::ios::binary);
+    KIRI_LOG_DEBUG("Input Path={0}", input_path);
+
+    return std::vector<char>(std::istreambuf_iterator<char>(ifs),
+                             std::istreambuf_iterator<char>());
 }

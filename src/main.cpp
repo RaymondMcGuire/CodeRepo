@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-11-01 12:46:32
+ * @LastEditTime: 2020-11-02 03:00:41
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -11,6 +11,7 @@
 
 #include <kiri_func.h>
 #include <kiri_case.h>
+#include <fbs/fbs_sample.h>
 
 int main(int argc, char **argv)
 {
@@ -108,4 +109,7 @@ int main(int argc, char **argv)
     us = reverse_bit(us);
     KIRI_LOG_DEBUG("After Reversed");
     PrintBinary(us);
+
+    KIRI_LOG_INFO("Test FlatBuffer Demo!");
+    fbs_read_sample();
 }

@@ -6,7 +6,7 @@
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_case.h
  */
-
+#pragma once
 /*** 
  * @description: a[N] known，b[i] = a[0]*...*a[N-1]/a[i], no temp variables
  * @param {*}

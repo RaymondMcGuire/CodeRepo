@@ -7,7 +7,6 @@ project(${PROJECT_NAME} LANGUAGES C CXX)
 
 set(EXTLIBS_INCLUDE ${CMAKE_SOURCE_DIR}/extlib/include)
 
-# CUDA PBS Library
 file(GLOB_RECURSE SOURCES "src/*.cu" "src/*.cpp" "src/*.c")
 file(GLOB_RECURSE HEADERS "include/*.cuh" "include/*.hpp" "include/*.h")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ./bin)
@@ -25,9 +24,9 @@ add_executable(${PROJECT_NAME}
     ${HEADERS}
 )
 
-# fixed c4819 warning
 set_target_properties(
     ${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 17
     OUTPUT_NAME_DEBUG ${PROJECT_NAME}d
     OUTPUT_NAME_RELEASE ${PROJECT_NAME}
     COMPILE_FLAGS ""
