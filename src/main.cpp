@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-10-31 18:28:33
+ * @LastEditTime: 2020-11-01 12:46:32
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -94,11 +94,18 @@ int main(int argc, char **argv)
     prime_num = find_prime_number_bit(bit_primes, bit_flags, MAX_NUM);
     PrintArray(bit_primes, prime_num);
 
-    KIRI_LOG_INFO("Reverse Bits Func!");
+    KIRI_LOG_INFO("Exchange High and Low Position Func!");
     unsigned short us = 34520;
     KIRI_LOG_DEBUG("Value={0}", us);
     PrintBinary(us);
-    KIRI_LOG_DEBUG("After Reverse Bits");
+    KIRI_LOG_DEBUG("After Exchanged");
     us = (us >> 8) | (us << 8);
+    PrintBinary(us);
+
+    KIRI_LOG_INFO("Reverse Bit Func!");
+    KIRI_LOG_DEBUG("Before Reverse");
+    PrintBinary(us);
+    us = reverse_bit(us);
+    KIRI_LOG_DEBUG("After Reversed");
     PrintBinary(us);
 }

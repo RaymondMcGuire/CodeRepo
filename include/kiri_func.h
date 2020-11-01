@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-23 11:54:18
- * @LastEditTime: 2020-10-31 18:23:57
+ * @LastEditTime: 2020-11-01 12:40:56
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\include\kiri_func.h
@@ -127,4 +127,15 @@ int find_prime_number_bit(int primes[], int flags[], int n)
     }
 
     return cnt;
+}
+
+template <class T>
+T reverse_bit(T val)
+{
+    val = ((val & 0xAAAA) >> 1) | ((val & 0x5555) << 1);
+    val = ((val & 0xCCCC) >> 2) | ((val & 0x3333) << 2);
+    val = ((val & 0xF0F0) >> 4) | ((val & 0x0F0F) << 4);
+    val = ((val & 0xFF00) >> 8) | ((val & 0x00FF) << 8);
+
+    return val;
 }
