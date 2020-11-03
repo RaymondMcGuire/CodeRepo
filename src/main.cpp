@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2020-11-02 03:00:41
+ * @LastEditTime: 2020-11-03 18:26:26
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -110,6 +110,11 @@ int main(int argc, char **argv)
     KIRI_LOG_DEBUG("After Reversed");
     PrintBinary(us);
 
-    KIRI_LOG_INFO("Test FlatBuffer Demo!");
-    fbs_read_sample();
+    // KIRI_LOG_INFO("Test FlatBuffer Demo!");
+    // fbs_read_sample();
+
+    KIRI_LOG_INFO("Case2: find lost num in array(all of the data is pair)");
+    int case2_array[15] = {1, 347, 6, 9, 13, 65, 889, 712, 889, 347, 1, 9, 65, 13, 712};
+    int lost_num = case2(case2_array, 15);
+    KIRI_LOG_DEBUG("Lost Number is {0}", lost_num);
 }
