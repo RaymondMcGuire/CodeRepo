@@ -30,5 +30,4 @@ cmake .. -G"Visual Studio 16 2019" -A x64
 #### For Windows
 
 - cd to ./scripts folder
-- choose your visual studio version(vs15/vs17/vs19)
 - run the bat file
