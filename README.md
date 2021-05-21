@@ -7,7 +7,8 @@
 
 ## Setup
 
-### Command Line
+### Windows
+#### Command Line
 
 ```rb
 cd /to/your/project/path
@@ -25,9 +26,7 @@ cd build
 cmake .. -G"Visual Studio 16 2019" -A x64
 ```
 
-### Scripts
-
-#### For Windows
+#### Scripts
 
 - cd to ./scripts folder
 - run the bat file
