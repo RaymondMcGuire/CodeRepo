@@ -1,106 +1,180 @@
 //
 //  main.c
-//  C_demo5
+//  C_demo6
 //
 //  Created by 胡家豪 on 2021/05/21.
 //
 
 #include <stdio.h>
 
-//判断是否是素数的自定义函数
-int isPrime(int a)
+
+//自定义函数---查找元素在数组中的位置
+/*  a：需要查找的元素
+    array[]：元素所在数组
+    length：数组长度
+ */
+int search(int a,int array[],int length)
 {
-    int ret = 1;
-    for (int i = 2; i < a; i ++)
-    {
-        if (a % i == 0)
+    int ret = -1;
+    for (int i = 0; i < length; i ++) {
+        if (array[i] == a)
         {
-            ret = 0;
+            ret = i;
+            break;
         }
     }
     return ret;
 }
 
-//求和的自定义函数
-int sum(int a,int b)
+int isPrime(int x,int knownPrimes[],int numberOfKnownPrimes)
 {
-    int sum = 0;
-    for (int i = a; i <= b; i ++) {
-        sum += i;
+    int isPrime = 1;
+    int i;
+    for (i = 0 ; i < numberOfKnownPrimes; i ++) {
+        if (x % knownPrimes[i] == 0) {
+            isPrime = 0;
+            break;
+        }
     }
-    return sum;
+    
+    return isPrime;
 }
+
+//二分搜索
+int search_bisection(int key,int a[],int length)
+{
+    int ret = -1;
+    int left = 0;
+    int right = length - 1;
+
+    while (left < right)
+    {
+        int mid = (left + right )/2;
+        if (a[mid] == key)
+        {
+            ret = mid;
+            break;
+        }
+        else if(a[mid] < key)
+        {
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid - 1;
+        }
+    }
+    return ret;
+}
+
+//求最大值ID
+int max(int a[],int length)
+{
+    int max = 0;
+    for (int i = 1; i < length ; i ++) {
+        if (a[i] > a[max])
+        {
+            max = i;
+        }
+    }
+    return max;
+}
+
 
 int main()
 {
-//    数组与函数
-//    ①求平均数，并输出比平均数大的数
+    //数组运算
+    //① 线性搜索
+//    int a[] = {2,4,6,7,1,3,5,9,11,13,23,4,32};
 //    int x;
-//    int cnt = 0;
-//    int number[100];
-//    double sum = 0.0;
+//    int loc;
+//    printf("输入一个数字：");
 //    scanf("%d",&x);
-//    while (x != -1)
+//    loc = search(x, a, sizeof(a) / sizeof(a[0]));
+//    if (loc == -1)
 //    {
-//        number[cnt] = x;
-//        sum += x;
-//        cnt ++;
-//        scanf("%d",&x);
+//        printf("不存在\n");
+//    } else
+//    {
+//        printf("数组中的第%d元素为%d\n",loc + 1,x);
 //    }
-//    double avg;
-//    avg = sum / cnt;
-//    printf("%f\n",avg);
+    
+    
+    //一一对应查找
+//    struct{
+//        int amount;
+//        char *name;
+//    } coins[] = {
+//        {1,"penny"},
+//        {5,"nickel"},
+//        {10,"dime"},
+//        {25,"quarter"},
+//        {50,"half-dollar"}
+//    };
 //
-//    for (int i = 0; i < cnt; i++)
-//    {
-//        if (number[i] > avg)
+//    int k;
+//    scanf("%d",&k);
+//    for (int i = 0; i < sizeof(coins)/sizeof(coins[0]); i ++) {
+//        if (k == coins[i].amount)
 //        {
-//            printf("%d\n",number[i]);
+//            printf("%s\n",coins[i].name);
+//            break;
 //        }
 //    }
+
     
     
-//    ②输入一位数的非负整数，统计每个数字出现的次数
-    //不符合规则的数字视为输出结束
-//    int x ;
-//    const int LENGTH = 10;
-//    int cnt[LENGTH];
-//    scanf("%d",&x);
-//    for (int i = 0; i < LENGTH; i ++) {
-//        cnt[i] = 0;
+    //二分法检索
+//    int key;
+//    scanf("%d",&key);
+//    int a[] = {2,4,9,11,15,18,26,28,29,33,38,46,57,68,89};
+//    if (search_bisection(key, a, sizeof(a)/sizeof(a[0])) == -1 )
+//    {
+//        printf("不存在");
 //    }
-//    while (x >= 0 && x <= 9) {
-//        cnt[x] ++;
-//        scanf("%d", &x);
+//    else
+//    {
+//        printf("%d在数组中的%d位",key,search_bisection(key, a, sizeof(a)/sizeof(a[0])));
 //    }
-//    for (int i = 0; i < LENGTH; i ++) {
-//        printf("输入%d为%d次\n",i,cnt[i]);
-//    }
+//
     
-//    ③自定义函数
-//    求[a,b]之间素数的和(a<b)
+    //选择排序
     
-//    int a , b;
-//    int sum = 0;
-//    int cnt = 0;
-//    scanf("%d %d",&a, &b);
-//    for (int i = a; i <= b; i ++) {
-//        if (isPrime(i))
+    int a[] = {14,25,76,67,23,98,47,32,90,5,66,87,16};
+    int len = sizeof(a)/sizeof(a[0]);
+    int t = 0;
+    for (int i = len - 1 ; i > 0; i --) {
+        int maxid = max(a, i + 1);
+        t = a[maxid];
+        a[maxid] = a[i];
+        a[i] = t;
+    }
+    for (int i = 0; i < len; i ++) {
+        printf("%d\n",a[i]);
+    }
+    
+    
+    //输出素数（简便方法）
+    //让一个数除以所有比他小的素数，如果不能整除，则这个数是素数
+//    const int number = 100;
+//    int Primes[number] = {2};
+//    int cnt = 1;
+//    int i = 3;
+//    for (cnt = 1; cnt < number;i ++ ) {
+//        if (isPrime(i,Primes,cnt))
 //        {
-//            sum += i;
-//            cnt ++;
+//            Primes[cnt++] = i;
 //        }
 //    }
-//    printf("%d和%d之间共有%d个素数，他们的和为%d\n",a,b,cnt,sum);
+//    for (int i = 0; i < cnt; i ++) {
+//        printf("%d\n",Primes[i]);
+//    }
     
-//
-//    ④自定义函数
-//    求和
     
-    int x , y;
-    scanf("%d %d",&x,&y);
-    printf("%d到%d的所有数字的和为%d\n",x,y,sum(x, y));
+
+    
     
     
     return 0;
+    
 }
