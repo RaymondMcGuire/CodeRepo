@@ -45,7 +45,7 @@ int main()
     int b = 0;
     scanf("%d/%d",&a,&b);
     int d = divisor(a, b);
-    while (divisor(a, b) != 0)
+    while (d != 0)
     {
         a /= d;
         b /= d;
