@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2021-02-01 16:14:37
+ * @LastEditTime: 2021-05-28 13:10:34
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -13,7 +13,7 @@
 #include <kiri_case.h>
 #include <fbs/fbs_sample.h>
 
-int main(int argc, char **argv)
+int main1(int argc, char **argv)
 {
     KiriLog::Init();
     KIRI_LOG_INFO("Initialized KiriLog System!");
