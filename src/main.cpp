@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
- * @LastEditTime: 2021-05-19 23:59:43
+ * @LastEditTime: 2021-05-28 13:10:34
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \CodeRepo\src\main.cpp
@@ -13,11 +13,7 @@
 #include <kiri_case.h>
 #include <fbs/fbs_sample.h>
 
-// int main(int argc, char **argv)
-// {
-//     KiriLog::Init();
-//     KIRI_LOG_INFO("Initialized KiriLog System!");
-
+    KIRI_LOG_INFO("Initialized KiriLog System!");
 //     KIRI_LOG_INFO("Bit Shift!");
 //     int a = 15, a1 = -15;
 //     KIRI_LOG_DEBUG("Value={0}, Right Shift {1}, Result={2}", a, 2, BIT_RS(a, 2));
