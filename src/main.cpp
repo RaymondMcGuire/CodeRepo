@@ -1,9 +1,9 @@
-/*** 
+/***
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
  * @LastEditTime: 2021-06-01 11:26:27
  * @LastEditors: Xu.WANG
- * @Description: 
+ * @Description:
  * @FilePath: \src\main.cpp
  */
 
@@ -13,12 +13,12 @@
 #include <kiri_case.h>
 #include <fbs/fbs_sample.h>
 
-//KIRI_LOG_INFO("Initialized KiriLog System!");
-//     KIRI_LOG_INFO("Bit Shift!");
-//     int a = 15, a1 = -15;
-//     KIRI_LOG_DEBUG("Value={0}, Right Shift {1}, Result={2}", a, 2, BIT_RS(a, 2));
-//     KIRI_LOG_DEBUG("Value={0}, Right Shift {1}, Result={2}", a1, 2, BIT_RS(a1, 2));
-//     KIRI_LOG_DEBUG("Value={0}, Left Shift {1}, Result={2}", a, 2, BIT_LS(a, 2));
+// KIRI_LOG_INFO("Initialized KiriLog System!");
+//      KIRI_LOG_INFO("Bit Shift!");
+//      int a = 15, a1 = -15;
+//      KIRI_LOG_DEBUG("Value={0}, Right Shift {1}, Result={2}", a, 2, BIT_RS(a, 2));
+//      KIRI_LOG_DEBUG("Value={0}, Right Shift {1}, Result={2}", a1, 2, BIT_RS(a1, 2));
+//      KIRI_LOG_DEBUG("Value={0}, Left Shift {1}, Result={2}", a, 2, BIT_LS(a, 2));
 
 //     KIRI_LOG_INFO("Bit Judge Odd/Even!");
 //     KiriTimer timer("Odd/Even Print(Bit)");
@@ -117,62 +117,99 @@
 //     return 0;
 // }
 
-class B
+using namespace std;
+
+vector<int> kmpTable(string needle)
 {
-public:
-    B() { b = 0; }
-    B(int _b) { b = _b; }
-    ~B() {}
+    auto n = needle.size();
+    vector<int> lps(n, 0);
+    for (auto i = 1, len = 0; i < n;)
+    {
+        if (needle[i] == needle[len])
+        {
+            lps[i++] = ++len;
+        }
+        else if (len)
+        {
+            len = lps[len - 1];
+        }
+        else
+        {
+            lps[i++] = 0;
+        }
+    }
+    return lps;
+}
 
-    int GetB() { return b; }
-    void SetB(int _b) { b = _b; }
-
-private:
-    int b;
-};
-typedef std::shared_ptr<B> BPtr;
-
-class A
+int strStr(string haystack, string needle)
 {
-public:
-    A()
+    int m = haystack.size(), n = needle.size();
+
+    if (!n)
+        return 0;
+
+    auto lps = kmpTable(needle);
+    for (auto i = 0, j = 0; i < m;)
     {
-        a = 0;
-        bptr = std::make_shared<B>(0);
+        if (haystack[i] == needle[j])
+        {
+            i++;
+            j++;
+        }
+
+        if (j == n)
+            return i - j;
+
+        if (i < m && haystack[i] != needle[j])
+        {
+            KIRI_LOG_DEBUG("j={0}", j);
+            if (j)
+                j = lps[j - 1];
+            else
+                i++;
+        }
     }
-    A(int _a)
+
+    return -1;
+}
+
+vector<int> kmpProcess(string needle)
+{
+    int n = needle.size();
+    vector<int> lps(n, 0);
+    for (int i = 1, len = 0; i < n;)
     {
-        a = _a;
-        bptr = std::make_shared<B>(a * 100);
+        if (needle[i] == needle[len])
+        {
+            lps[i++] = ++len;
+        }
+        else if (len)
+        {
+            len = lps[len - 1];
+        }
+        else
+        {
+            lps[i++] = 0;
+        }
     }
-    ~A() {}
+    return lps;
+}
 
-    int GetA() { return a; }
-    void SetA(int _a) { a = _a; }
-
-private:
-    int a;
-    BPtr bptr;
-};
-
-typedef std::shared_ptr<A> APtr;
-
-int main1(int argc, char **argv)
+int main(int argc, char **argv)
 {
     KiriLog::Init();
     KIRI_LOG_INFO("Initialized KiriLog System!");
 
-    auto testA = std::make_shared<A>();
-    testA->SetA(10);
+    vector<int> test{{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}};
 
-    std::vector<APtr> sharedVector;
-    sharedVector.emplace_back(testA);
+    // auto lps = kmpTable("ll");
 
-    sharedVector[0]->SetA(20);
+    // for (size_t i = 0; i < lps.size(); i++)
+    // {
+    //     KIRI_LOG_DEBUG("data = {0}", lps[i]);
+    // }
 
-    testA->SetA(300);
-
-    KIRI_LOG_DEBUG("testA.a={0}, sharedVector[0].a={1}, count={2}", testA->GetA(), sharedVector[0]->GetA(), testA.use_count());
+    KIRI_LOG_DEBUG("res={0}", strStr("aabaaabaaac", "aabaaac"));
 
     return 0;
 }
