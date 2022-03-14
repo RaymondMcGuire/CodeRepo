@@ -6,6 +6,7 @@ set(PROJECT_NAME code_repo)
 project(${PROJECT_NAME} LANGUAGES C CXX)
 
 set(EXTLIBS_INCLUDE ${CMAKE_SOURCE_DIR}/extlib/include)
+set(KIRI_MATH_INCLUDE ${CMAKE_SOURCE_DIR}/KiriMathMini/include)
 
 file(GLOB_RECURSE SOURCES "src/*.cu" "src/*.cpp" "src/*.c")
 file(GLOB_RECURSE HEADERS "include/*.cuh" "include/*.hpp" "include/*.h")
@@ -35,5 +36,6 @@ set_target_properties(
 target_include_directories(${PROJECT_NAME} PUBLIC
     include
     ${EXTLIBS_INCLUDE}
+    ${KIRI_MATH_INCLUDE}
 )
 

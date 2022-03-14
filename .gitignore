@@ -1,4 +1,12 @@
+/*
+ * Author: Xu WANG
+ * Created time: 2022-03-14 12:59:18
+ * Last Modified by:
+ * Last Modified time:
+ */
+
 .vscode
 /**/*.pyc
+/**/*.vtk
 build
 .DS_Store

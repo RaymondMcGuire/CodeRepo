@@ -1,3 +1,10 @@
+/*
+ * Author: Xu WANG
+ * Created time: 2022-03-14 12:59:18
+ * Last Modified by:
+ * Last Modified time:
+ */
+
 /***
  * @Author: Xu.WANG
  * @Date: 2020-10-19 00:02:37
@@ -117,90 +124,92 @@
 //     return 0;
 // }
 
-using namespace std;
+// using namespace std;
 
-vector<int> kmpTable(string needle)
-{
-    auto n = needle.size();
-    vector<int> lps(n, 0);
-    for (auto i = 1, len = 0; i < n;)
-    {
-        if (needle[i] == needle[len])
-        {
-            lps[i++] = ++len;
-        }
-        else if (len)
-        {
-            len = lps[len - 1];
-        }
-        else
-        {
-            lps[i++] = 0;
-        }
-    }
-    return lps;
-}
+// vector<int> kmpTable(string needle)
+// {
+//     auto n = needle.size();
+//     vector<int> lps(n, 0);
+//     for (auto i = 1, len = 0; i < n;)
+//     {
+//         if (needle[i] == needle[len])
+//         {
+//             lps[i++] = ++len;
+//         }
+//         else if (len)
+//         {
+//             len = lps[len - 1];
+//         }
+//         else
+//         {
+//             lps[i++] = 0;
+//         }
+//     }
+//     return lps;
+// }
 
-int strStr(string haystack, string needle)
-{
-    int m = haystack.size(), n = needle.size();
+// int strStr(string haystack, string needle)
+// {
+//     int m = haystack.size(), n = needle.size();
 
-    if (!n)
-        return 0;
+//     if (!n)
+//         return 0;
 
-    auto lps = kmpTable(needle);
-    for (auto i = 0, j = 0; i < m;)
-    {
-        if (haystack[i] == needle[j])
-        {
-            i++;
-            j++;
-        }
+//     auto lps = kmpTable(needle);
+//     for (auto i = 0, j = 0; i < m;)
+//     {
+//         if (haystack[i] == needle[j])
+//         {
+//             i++;
+//             j++;
+//         }
 
-        if (j == n)
-            return i - j;
+//         if (j == n)
+//             return i - j;
 
-        if (i < m && haystack[i] != needle[j])
-        {
-            KIRI_LOG_DEBUG("j={0}", j);
-            if (j)
-                j = lps[j - 1];
-            else
-                i++;
-        }
-    }
+//         if (i < m && haystack[i] != needle[j])
+//         {
+//             KIRI_LOG_DEBUG("j={0}", j);
+//             if (j)
+//                 j = lps[j - 1];
+//             else
+//                 i++;
+//         }
+//     }
 
-    return -1;
-}
+//     return -1;
+// }
 
-vector<int> kmpProcess(string needle)
-{
-    int n = needle.size();
-    vector<int> lps(n, 0);
-    for (int i = 1, len = 0; i < n;)
-    {
-        if (needle[i] == needle[len])
-        {
-            lps[i++] = ++len;
-        }
-        else if (len)
-        {
-            len = lps[len - 1];
-        }
-        else
-        {
-            lps[i++] = 0;
-        }
-    }
-    return lps;
-}
+// vector<int> kmpProcess(string needle)
+// {
+//     int n = needle.size();
+//     vector<int> lps(n, 0);
+//     for (int i = 1, len = 0; i < n;)
+//     {
+//         if (needle[i] == needle[len])
+//         {
+//             lps[i++] = ++len;
+//         }
+//         else if (len)
+//         {
+//             len = lps[len - 1];
+//         }
+//         else
+//         {
+//             lps[i++] = 0;
+//         }
+//     }
+//     return lps;
+// }
+
+#include <vtk_writer.h>
 
 int main(int argc, char **argv)
 {
     KiriLog::Init();
     KIRI_LOG_INFO("Initialized KiriLog System!");
 
-    vector<int> test{{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}};
+    // vector<int> test{{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}};
 
     // auto lps = kmpTable("ll");
 
@@ -209,7 +218,27 @@ int main(int argc, char **argv)
     //     KIRI_LOG_DEBUG("data = {0}", lps[i]);
     // }
 
-    KIRI_LOG_DEBUG("res={0}", strStr("aabaaabaaac", "aabaaac"));
+    // KIRI_LOG_DEBUG("res={0}", strStr("aabaaabaaac", "aabaaac"));
+    std::vector<v3> pos;
+    float radius = 0.5f;
+    for (size_t i = 0; i < 10; i++)
+    {
+        for (size_t j = 0; j < 10; j++)
+        {
+            for (size_t k = 0; k < 10; k++)
+            {
+                auto p = Vector3F(i, j, k) * 2.f * radius;
+                v3 v;
+                v.data[0] = p.x;
+                v.data[1] = p.y;
+                v.data[2] = p.z;
+                pos.emplace_back(v);
+            }
+        }
+    }
+
+    auto writer = std::make_shared<VTKWriter>("C:/Users/t69985/project/lib/CodeRepo/export/");
+    writer->writeParticles("test.vtk", pos);
 
     return 0;
 }
